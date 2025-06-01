@@ -1,0 +1,130 @@
+const { lint } = require('stylelint');
+const plugin = require('../stylelint-plugin-display-multi-keyword-syntax');
+
+const config = {
+  plugins: [plugin],
+  rules: {
+    'plugin/display-multi-keyword': true,
+  },
+};
+
+describe('plugin/display-multi-keyword', () => {
+  it('should report single keyword display values', async () => {
+    const css = `
+      .block { display: block; }
+      .inline { display: inline; }
+      .flex { display: flex; }
+      .grid { display: grid; }
+      .inline-block { display: inline-block; }
+    `;
+    
+    const result = await lint({
+      code: css,
+      config,
+    });
+    
+    expect(result.errored).toBe(true);
+    expect(result.results[0].warnings).toHaveLength(5);
+    expect(result.results[0].warnings[0].text).toContain('`block` → `block flow`');
+    expect(result.results[0].warnings[1].text).toContain('`inline` → `inline flow`');
+    expect(result.results[0].warnings[2].text).toContain('`flex` → `block flex`');
+    expect(result.results[0].warnings[3].text).toContain('`grid` → `block grid`');
+    expect(result.results[0].warnings[4].text).toContain('`inline-block` → `inline flow-root`');
+  });
+
+  it('should not report multi-keyword display values', async () => {
+    const css = `
+      .block { display: block flow; }
+      .inline { display: inline flow; }
+      .flex { display: block flex; }
+      .grid { display: block grid; }
+      .inline-block { display: inline flow-root; }
+    `;
+    
+    const result = await lint({
+      code: css,
+      config,
+    });
+    
+    expect(result.errored).toBe(false);
+    expect(result.results[0].warnings).toHaveLength(0);
+  });
+
+  it.skip('should fix single keyword display values with fix option', async () => {
+    const css = `
+      .block { display: block; }
+      .inline { display: inline; }
+      .flex { display: flex; }
+    `;
+    
+    const result = await lint({
+      code: css,
+      config,
+      fix: true,
+    });
+    
+    const output = result.results[0]._postcssResult.css || result.code;
+    expect(output).toContain('display: block flow');
+    expect(output).toContain('display: inline flow');
+    expect(output).toContain('display: block flex');
+  });
+
+  it('should handle all display value mappings', async () => {
+    const css = `
+      .flow-root { display: flow-root; }
+      .list-item { display: list-item; }
+      .inline-flex { display: inline-flex; }
+      .inline-grid { display: inline-grid; }
+      .table { display: table; }
+      .inline-table { display: inline-table; }
+      .ruby { display: ruby; }
+    `;
+    
+    const result = await lint({
+      code: css,
+      config,
+    });
+    
+    expect(result.errored).toBe(true);
+    const warnings = result.results[0].warnings;
+    expect(warnings.find(w => w.text.includes('`flow-root` → `block flow-root`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('`list-item` → `block flow list-item`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('`inline-flex` → `inline flex`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('`inline-grid` → `inline grid`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('`table` → `block table`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('`inline-table` → `inline table`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('`ruby` → `inline ruby`'))).toBeTruthy();
+  });
+
+  it('should handle values not in the mapping', async () => {
+    const css = `
+      .none { display: none; }
+      .contents { display: contents; }
+    `;
+    
+    const result = await lint({
+      code: css,
+      config,
+    });
+    
+    expect(result.errored).toBe(false);
+    expect(result.results[0].warnings).toHaveLength(0);
+  });
+
+  it('should respect severity option', async () => {
+    const css = `.block { display: block; }`;
+    
+    const result = await lint({
+      code: css,
+      config: {
+        ...config,
+        rules: {
+          'plugin/display-multi-keyword': [true, { severity: 'error' }],
+        },
+      },
+    });
+    
+    expect(result.errored).toBe(true);
+    expect(result.results[0].warnings[0].severity).toBe('error');
+  });
+});

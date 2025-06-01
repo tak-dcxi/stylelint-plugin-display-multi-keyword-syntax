@@ -1,0 +1,35 @@
+{
+  "name": "stylelint-plugin-display-multi-keyword-syntax",
+  "version": "1.0.0",
+  "description": "Stylelint plugin to enforce multi-keyword syntax for display property",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "stylelint",
+    "stylelint-plugin",
+    "css",
+    "display",
+    "multi-keyword"
+  ],
+  "author": "Takahiro Arai",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tak-dcxi/stylelint-plugin-display-multi-keyword-syntax.git"
+  },
+  "peerDependencies": {
+    "stylelint": "^14.0.0 || ^15.0.0 || ^16.0.0"
+  },
+  "dependencies": {
+    "postcss": "^8.4.31"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "stylelint": "^16.0.0"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
