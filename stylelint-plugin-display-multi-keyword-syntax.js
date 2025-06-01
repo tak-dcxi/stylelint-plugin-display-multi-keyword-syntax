@@ -25,7 +25,7 @@ const displayValueMap = {
 };
 
 const meta = {
-  url: 'https://github.com/your-username/stylelint-plugin-display-multi-keyword',
+  url: 'https://github.com/tak-dcxi/stylelint-plugin-display-multi-keyword-syntax',
 };
 
 const ruleFunction = (primaryOption, secondaryOption, context) => {
