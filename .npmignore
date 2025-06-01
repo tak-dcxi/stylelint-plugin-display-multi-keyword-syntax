@@ -1,0 +1,7 @@
+__tests__/
+jest.config.js
+.gitignore
+.git/
+coverage/
+*.log
+.DS_Store

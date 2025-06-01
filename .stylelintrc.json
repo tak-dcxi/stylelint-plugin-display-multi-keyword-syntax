@@ -1,14 +1,8 @@
 {
   "plugins": [
-    "./path-to-your-plugin/stylelint-plugin-display-multi-keyword-syntax"
+    "./stylelint-plugin-display-multi-keyword-syntax.js"
   ],
   "rules": {
-    "plugin/display-multi-keyword-syntax": [
-      true,
-      {
-        "severity": "warning",
-        "fix": true
-      }
-    ]
+    "plugin/display-multi-keyword": true
   }
 }

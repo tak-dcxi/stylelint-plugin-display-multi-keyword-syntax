@@ -25,11 +25,11 @@ describe('plugin/display-multi-keyword', () => {
     
     expect(result.errored).toBe(true);
     expect(result.results[0].warnings).toHaveLength(5);
-    expect(result.results[0].warnings[0].text).toContain('`block` → `block flow`');
-    expect(result.results[0].warnings[1].text).toContain('`inline` → `inline flow`');
-    expect(result.results[0].warnings[2].text).toContain('`flex` → `block flex`');
-    expect(result.results[0].warnings[3].text).toContain('`grid` → `block grid`');
-    expect(result.results[0].warnings[4].text).toContain('`inline-block` → `inline flow-root`');
+    expect(result.results[0].warnings[0].text).toContain('Use multi-keyword syntax `block flow` instead of `block`');
+    expect(result.results[0].warnings[1].text).toContain('Use multi-keyword syntax `inline flow` instead of `inline`');
+    expect(result.results[0].warnings[2].text).toContain('Use multi-keyword syntax `block flex` instead of `flex`');
+    expect(result.results[0].warnings[3].text).toContain('Use multi-keyword syntax `block grid` instead of `grid`');
+    expect(result.results[0].warnings[4].text).toContain('Use multi-keyword syntax `inline flow-root` instead of `inline-block`');
   });
 
   it('should not report multi-keyword display values', async () => {
@@ -87,13 +87,13 @@ describe('plugin/display-multi-keyword', () => {
     
     expect(result.errored).toBe(true);
     const warnings = result.results[0].warnings;
-    expect(warnings.find(w => w.text.includes('`flow-root` → `block flow-root`'))).toBeTruthy();
-    expect(warnings.find(w => w.text.includes('`list-item` → `block flow list-item`'))).toBeTruthy();
-    expect(warnings.find(w => w.text.includes('`inline-flex` → `inline flex`'))).toBeTruthy();
-    expect(warnings.find(w => w.text.includes('`inline-grid` → `inline grid`'))).toBeTruthy();
-    expect(warnings.find(w => w.text.includes('`table` → `block table`'))).toBeTruthy();
-    expect(warnings.find(w => w.text.includes('`inline-table` → `inline table`'))).toBeTruthy();
-    expect(warnings.find(w => w.text.includes('`ruby` → `inline ruby`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('Use multi-keyword syntax `block flow-root` instead of `flow-root`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('Use multi-keyword syntax `block flow list-item` instead of `list-item`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('Use multi-keyword syntax `inline flex` instead of `inline-flex`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('Use multi-keyword syntax `inline grid` instead of `inline-grid`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('Use multi-keyword syntax `block table` instead of `table`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('Use multi-keyword syntax `inline table` instead of `inline-table`'))).toBeTruthy();
+    expect(warnings.find(w => w.text.includes('Use multi-keyword syntax `inline ruby` instead of `ruby`'))).toBeTruthy();
   });
 
   it('should handle values not in the mapping', async () => {

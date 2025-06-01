@@ -1,6 +1,6 @@
 {
   "name": "stylelint-plugin-display-multi-keyword-syntax",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Stylelint plugin to enforce multi-keyword syntax for display property",
   "main": "stylelint-plugin-display-multi-keyword-syntax.js",
   "files": [
