@@ -5,7 +5,7 @@
 
 const stylelint = require("stylelint");
 
-const ruleName = "plugin/display-multi-keyword";
+const ruleName = "plugin/display-multi-keyword-syntax";
 const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: (value, multiValue) =>
     `Use multi-keyword syntax \`${multiValue}\` instead of \`${value}\`.`,

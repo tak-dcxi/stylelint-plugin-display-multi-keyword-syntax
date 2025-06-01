@@ -4,11 +4,11 @@ const plugin = require('../stylelint-plugin-display-multi-keyword-syntax');
 const config = {
   plugins: [plugin],
   rules: {
-    'plugin/display-multi-keyword': true,
+    'plugin/display-multi-keyword-syntax': true,
   },
 };
 
-describe('plugin/display-multi-keyword', () => {
+describe('plugin/display-multi-keyword-syntax', () => {
   it('should report single keyword display values', async () => {
     const css = `
       .block { display: block; }
@@ -119,7 +119,7 @@ describe('plugin/display-multi-keyword', () => {
       config: {
         ...config,
         rules: {
-          'plugin/display-multi-keyword': [true, { severity: 'error' }],
+          'plugin/display-multi-keyword-syntax': [true, { severity: 'error' }],
         },
       },
     });

@@ -30,13 +30,13 @@ yarn add --dev stylelint-plugin-display-multi-keyword-syntax
 
 ## Usage
 
-Add `stylelint-plugin-display-multi-keyword-syntax` to your Stylelint configuration `plugins` array, then add the `plugin/display-multi-keyword` rule to your `rules` object.
+Add `stylelint-plugin-display-multi-keyword-syntax` to your Stylelint configuration `plugins` array, then add the `plugin/display-multi-keyword-syntax` rule to your `rules` object.
 
 ```json
 {
   "plugins": ["stylelint-plugin-display-multi-keyword-syntax"],
   "rules": {
-    "plugin/display-multi-keyword": true
+    "plugin/display-multi-keyword-syntax": true
     // ... other rules
   }
 }
@@ -44,7 +44,7 @@ Add `stylelint-plugin-display-multi-keyword-syntax` to your Stylelint configurat
 
 ## Options
 
-The `plugin/display-multi-keyword` rule has the following options:
+The `plugin/display-multi-keyword-syntax` rule has the following options:
 
 ### Primary option: `true`
 
@@ -53,7 +53,7 @@ Setting the primary option to `true` enables the rule. It will report single-key
 **Example:**
 
 ```css
-/* With "plugin/display-multi-keyword": true */
+/* With "plugin/display-multi-keyword-syntax": true */
 
 /* ❌ Problematic CSS (will be flagged) */
 .element1 {
@@ -99,7 +99,7 @@ If `true`, this rule will automatically fix the reported single-keyword `display
 ```json
 {
   "rules": {
-    "plugin/display-multi-keyword": [true, { "fix": true }]
+    "plugin/display-multi-keyword-syntax": [true, { "fix": true }]
   }
 }
 ```
@@ -129,7 +129,7 @@ Sets the severity level for this rule. Issues from this rule will be reported as
 ```json
 {
   "rules": {
-    "plugin/display-multi-keyword": [true, { "severity": "warning" }]
+    "plugin/display-multi-keyword-syntax": [true, { "severity": "warning" }]
   }
 }
 ```
